@@ -54,14 +54,22 @@
   }}
 }
 
+\def \jobtitle#1{\def\@jobtitle{#1}}
+\def \printjobtitle {%
+  \begingroup
+    \centerline{\large\bf\@jobtitle}
+    \nameskip\break
+  \endgroup
+}
 % \printaddress is used to style an address line (given as input)
 \def \printaddress #1{
   \begingroup
     \def \\ {\addressSep\ }
     \centerline{#1}
   \endgroup
-  \par
+  \\
   \addressskip
+  % \bigskip
 }
 
 % \printname is used to print the name as a page header
@@ -69,6 +77,7 @@
   \begingroup
     \hfil{\MakeUppercase{\namesize\bf \@name}}\hfil
     \nameskip\break
+  \printjobtitle
   \endgroup
 }
 
