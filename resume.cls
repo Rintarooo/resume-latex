@@ -35,7 +35,8 @@
 \def \name#1{\def\@name{#1}} % Defines the \name command to set name
 \def \@name {} % Sets \@name to empty by default
 
-\def \addressSep {$\diamond$} % Set default address separator to a diamond
+% \def \addressSep {$\diamond$} % Set default address separator to a diamond
+\def \addressSep {$\circ$}
 
 % One, two or three address lines can be specified 
 \let \@addressone \relax
@@ -43,22 +44,38 @@
 \let \@addressthree \relax
 
 % \address command can be used to set the first, second, and third address (last 2 optional)
+
+% \@ifundefined{XXX}{if XXX is undefined}{if XXX is already defined}
 \def \address #1{
+  \@ifundefined{@addressone}{
+    \def \@addressone {#1}
+  }{
   \@ifundefined{@addresstwo}{
-    \def \@addresstwo {#1}
+  \def \@addresstwo {#1}
   }{
-  \@ifundefined{@addressthree}{
-  \def \@addressthree {#1}
-  }{
-     \def \@addressone {#1}
+     \def \@addressthree {#1}
   }}
 }
 
+%%% original
+% \def \address #1{
+%   \@ifundefined{@addresstwo}{
+%     \def \@addresstwo {#1}
+%   }{
+%   \@ifundefined{@addressthree}{
+%   \def \@addressthree {#1}
+%   }{
+%      \def \@addressone {#1}
+%   }}
+% }
+
 \def \jobtitle#1{\def\@jobtitle{#1}}
+
 \def \printjobtitle {%
   \begingroup
     \centerline{\large\bf\@jobtitle}
-    \nameskip\break
+    % \nameskip\break
+    \\\break
   \endgroup
 }
 % \printaddress is used to style an address line (given as input)
@@ -68,7 +85,7 @@
     \centerline{#1}
   \endgroup
   \\
-  \addressskip
+  % \addressskip
   % \bigskip
 }
 
@@ -93,7 +110,7 @@
     \printaddress{\@addressone}}
   \@ifundefined{@addresstwo}{}{ % Print the second address if specified
     \printaddress{\@addresstwo}}
-     \@ifundefined{@addressthree}{}{ % Print the third address if specified
+  \@ifundefined{@addressthree}{}{ % Print the third address if specified
     \printaddress{\@addressthree}}
 }
 
