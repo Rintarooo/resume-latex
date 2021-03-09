@@ -70,20 +70,23 @@
 % }
 
 \def \jobtitle#1{\def\@jobtitle{#1}}
+\def \jobtitleA#1{\def\@jobtitleA{#1}}
 
 \def \printjobtitle {%
   \begingroup
     \centerline{\large\bf\@jobtitle}
-    % \nameskip\break
     \\
     \break
+    \centerline{\@jobtitleA}
+    % \nameskip\break
+    \break % https://www.overleaf.com/learn/latex/line_breaks_and_blank_spaces
   \endgroup
 }
 % \printaddress is used to style an address line (given as input)
 \def \printaddress #1{
   \begingroup
     \def \\ {\addressSep\ }
-    \centerline{#1}
+    \centerline{\bf#1}
   \endgroup
   \\
   % \addressskip
@@ -95,7 +98,6 @@
   \begingroup
     \hfil{\MakeUppercase{\namesize\bf \@name}}\hfil
     \nameskip\break
-  \printjobtitle
   \endgroup
 }
 
@@ -107,6 +109,7 @@
 \renewcommand{\document}{
   \ori@document  % Begin document
   \printname % Print the name specified with \name
+  \printjobtitle
   \@ifundefined{@addressone}{}{ % Print the first address if specified
     \printaddress{\@addressone}}
   \@ifundefined{@addresstwo}{}{ % Print the second address if specified
