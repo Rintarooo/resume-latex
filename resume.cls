@@ -86,8 +86,8 @@
 \def \printaddress #1{
   \begingroup
     \def \\ {\addressSep\ }
+    \centerline{\large#1}
     % \centerline{\bf#1}
-    \centerline{#1}
   \endgroup
   \\
   % \addressskip
